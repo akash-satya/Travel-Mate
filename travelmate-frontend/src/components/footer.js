@@ -1,7 +1,7 @@
 // src/components/Footer.js
 import React from 'react';
 import { Box, Container, Typography, Link, IconButton } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Facebook as FacebookIcon,
   Twitter as TwitterIcon,
@@ -12,9 +12,15 @@ import logo from '../assets/travelmate logo/1-removebg-preview.png';
 
 const Footer = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  // Only show footer on the home page
+  if (pathname !== '/') {
+    return null;
+  }
 
   return (
-    <Box sx={{ backgroundColor: '#f5f5f5', py: 4, mt: 4 }}>
+    <Box sx={{ backgroundColor: 'black', py: 4, mt: 4 }}>
       <Container
         sx={{
           display: 'flex',
@@ -24,34 +30,26 @@ const Footer = () => {
         }}
       >
         {/* Logo + Description */}
-        <Box
-        sx={{
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-        }}
-        >
-        <Box
+        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <Box
             onClick={() => navigate('/')}
             sx={{ height: 100, width: 'fit-content', cursor: 'pointer', mb: 2 }}
-        >
+          >
             <Box
-            component="img"
-            src={logo}
-            alt="Travel Mate Logo"
-            sx={{ height: '150%' }}
+              component="img"
+              src={logo}
+              alt="Travel Mate Logo"
+              sx={{ height: '150%' }}
             />
-        </Box>
-        <Typography variant="body2" color="text.secondary" maxWidth={300}>
+          </Box>
+          <Typography variant="body2" sx={{ color: 'white' }} maxWidth={300}>
             Your trusted companion for unforgettable travel experiences. Plan, explore, and discover the world with Travel Mate.
-        </Typography>
+          </Typography>
         </Box>
-
-        
 
         {/* Quick Links */}
         <Box sx={{ flex: 1 }}>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h6" gutterBottom sx={{ color: 'white' }}>
             Quick Links
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
@@ -69,7 +67,7 @@ const Footer = () => {
                   e.preventDefault();
                   navigate(path);
                 }}
-                color="text.primary"
+                sx={{ color: 'white' }}
               >
                 {label}
               </Link>
@@ -79,20 +77,20 @@ const Footer = () => {
 
         {/* Social Media */}
         <Box sx={{ flex: 1 }}>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h6" gutterBottom sx={{ color: 'white' }}>
             Connect With Us
           </Typography>
           <Box sx={{ display: 'flex', gap: 2 }}>
-            <IconButton aria-label="Facebook">
+            <IconButton aria-label="Facebook" sx={{ color: 'white' }}>
               <FacebookIcon />
             </IconButton>
-            <IconButton aria-label="Twitter">
+            <IconButton aria-label="Twitter" sx={{ color: 'white' }}>
               <TwitterIcon />
             </IconButton>
-            <IconButton aria-label="Instagram">
+            <IconButton aria-label="Instagram" sx={{ color: 'white' }}>
               <InstagramIcon />
             </IconButton>
-            <IconButton aria-label="YouTube">
+            <IconButton aria-label="YouTube" sx={{ color: 'white' }}>
               <YouTubeIcon />
             </IconButton>
           </Box>
